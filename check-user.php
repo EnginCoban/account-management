@@ -56,7 +56,7 @@ mysqli_close($conn);
 <body>
     <form action="login.php" method="POST">
         <div style="display:flex; align-items: center; justify-content: center;">
-            <button type="submit" class="btn btn-primary mb-3" name="logout">logout</button>
+            <button type="submit" class="btn btn-primary mb-3" name="logout">ausloggen</button>
 
         </div>
    

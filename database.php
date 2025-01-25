@@ -78,7 +78,7 @@ if (isset($_POST['forgot'])) {
         $randomCode = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
         $_SESSION['randomCode'] =  $randomCode;
         $_SESSION['email'] =  $forgotData;
-        header('Location: changeData.php');
+        header('Location: change-data.php');
     } else {
         echo 'Diese Email existiert nicht. Versuchen Sie es nochmal.';
     }
@@ -98,7 +98,7 @@ if (isset($_POST['change'])) {
         echo 'Daten wurden angelegt';
     } else {
         echo 'Error versuchen Sie es nochmal.';
-        header('Location : forgotPassword.php');
+        header('Location : forgot-password.php');
     }
 }
 

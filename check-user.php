@@ -29,11 +29,11 @@ if (!empty($username) && !empty($password) && isset($_POST['login'])) {
             echo '<p style="text-align: center;">Du bist eingeloggt!</p>';
         } else {
             echo '<p>Dieser Account existiert nicht!</p>';
-            echo '<a href="forgotPassword.php">Passwort vergessen?</a>';
+            echo '<a href="forgot-password.php">Passwort vergessen?</a>';
         }
     } else {
         echo '<p>Dieser Account existiert nicht!</p>';
-        echo '<a href="forgotPassword.php">Passwort vergessen?</a>';
+        echo '<a href="forgot-password.php">Passwort vergessen?</a>';
     }
 } else {
     echo '<h2 style="display:block;">Bitte füllen Sie die Felder aus!</h2>';
@@ -54,7 +54,7 @@ mysqli_close($conn);
 </head>
 
 <body>
-    <form action="log-me-in.php" method="POST">
+    <form action="login.php" method="POST">
         <div style="display:flex; align-items: center; justify-content: center;">
             <button type="submit" class="btn btn-primary mb-3" name="logout">logout</button>
 

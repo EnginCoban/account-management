@@ -107,6 +107,7 @@ if (isset($_POST['change'])) {
 
         if ($resultFromUpdate) {
             echo 'Daten wurden angelegt';
+            echo '<div><a href="login.php">zum login</a></div>';
         } else {
             echo 'Error versuchen Sie es nochmal.';
             header('Location : forgot-password.php');

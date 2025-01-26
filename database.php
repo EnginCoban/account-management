@@ -25,7 +25,7 @@ if (isset($_POST['createAccount'])) {
     $email = $_SESSION['email'];
     $username = $_SESSION['newUsername'];
     $password = $_SESSION['newPassword'];
- 
+
     $newSqlQuery = "SELECT name, email FROM reg_users WHERE name = '$username' OR email = '$email'";
 
     $newResult = mysqli_query($conn, $newSqlQuery);
@@ -36,6 +36,7 @@ if (isset($_POST['createAccount'])) {
         $emailFromDataBase = $row['email'];
         if ($nameFromDataBase === $username || $emailFromDataBase === $email) {
             echo 'Es gibt schon diese Benutzerdaten, legen Sie andere Daten fest';
+            include 'back-button.php';
         }
     }
     # Wenn false...
@@ -48,10 +49,12 @@ if (isset($_POST['createAccount'])) {
         #Wenn true...
         if ($result) {
             echo 'Ihre Daten wurden angelegt.';
+            echo '<a href="login.php">zurück zum login</a>';
         }
         #Wenn false...
         else {
             echo 'Daten konnten nicht angelegt werden.';
+            include 'back-button.php';
         }
     }
 }
@@ -66,39 +69,51 @@ if (isset($_POST['delete'])) {
         echo 'Daten wurden gelöscht';
     } else {
         echo 'Diese Email existiert nicht. Versuchen Sie es nochmal.';
+        include 'back-button.php';
     }
 }
 if (isset($_POST['forgot'])) {
-    $forgotData = $_POST['email'];
-    $sqlQuerySelectEmail = "SELECT email FROM reg_users WHERE email = '$forgotData'";
-    $resultFromEmail = mysqli_query($conn, $sqlQuerySelectEmail);
-    if ($resultFromEmail && mysqli_num_rows($resultFromEmail) > 0) {
-    
-        // Zufälliger 4-stelliger Zahlencode zwischen 0000 und 9999
-        $randomCode = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-        $_SESSION['randomCode'] =  $randomCode;
-        $_SESSION['email'] =  $forgotData;
-        header('Location: change-data.php');
+    if (!empty($_POST['email'])) {
+        $forgotData = $_POST['email'];
+        $sqlQuerySelectEmail = "SELECT email FROM reg_users WHERE email = '$forgotData'";
+        $resultFromEmail = mysqli_query($conn, $sqlQuerySelectEmail);
+        if ($resultFromEmail && mysqli_num_rows($resultFromEmail) > 0) {
+
+            // Zufälliger 4-stelliger Zahlencode zwischen 0000 und 9999
+            $randomCode = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+            $_SESSION['randomCode'] =  $randomCode;
+            $_SESSION['email'] =  $forgotData;
+            header('Location: change-data.php');
+        } else {
+            echo 'Diese Email existiert nicht. Versuchen Sie es nochmal.';
+            include 'back-button.php';
+        }
     } else {
-        echo 'Diese Email existiert nicht. Versuchen Sie es nochmal.';
+        echo 'Bitte füllen Sie die Felder aus!';
+        include 'back-button.php';
     }
 }
 
 
 if (isset($_POST['change'])) {
-    $changeData = $_SESSION['email'];
-    $changeUsername = $_POST['username'];
-    $changePassword = $_POST['password'];
-    $hashedPassword = password_hash($changePassword, PASSWORD_DEFAULT);
-    $sqlQueryUpdate = "UPDATE reg_users SET name = '$changeUsername', password = '$hashedPassword' WHERE email = '$changeData'";
-    $resultFromUpdate = mysqli_query($conn, $sqlQueryUpdate);
-    if ($resultFromUpdate) {
-     
-       
-        echo 'Daten wurden angelegt';
+
+    if (!empty($_POST['username']) && !empty($_POST['password'])) {
+        $changeData = $_SESSION['email'];
+        $changeUsername = $_POST['username'];
+        $changePassword = $_POST['password'];
+        $hashedPassword = password_hash($changePassword, PASSWORD_DEFAULT);
+        $sqlQueryUpdate = "UPDATE reg_users SET name = '$changeUsername', password = '$hashedPassword' WHERE email = '$changeData'";
+        $resultFromUpdate = mysqli_query($conn, $sqlQueryUpdate);
+
+        if ($resultFromUpdate) {
+            echo 'Daten wurden angelegt';
+        } else {
+            echo 'Error versuchen Sie es nochmal.';
+            header('Location : forgot-password.php');
+        }
     } else {
-        echo 'Error versuchen Sie es nochmal.';
-        header('Location : forgot-password.php');
+        echo 'Bitte füllen Sie die Felder aus!';
+        include 'back-button.php';
     }
 }
 

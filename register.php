@@ -33,40 +33,14 @@ include 'connection-db.php';
                         <input type="email" class="form-control" id="email" name="email">
                     </div>
                     <button type="submit" class="btn btn-primary" name="createAccount" id="submit">Account erstellen</button>
-
+                    <?php include 'back-button.php'; ?>
                 </form>
             </div>
         </div>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        let form = document.getElementById("form");
-
-        function validateForm(username, password, email, emailRegex) {
-            if (username.trim().length === 0 || password.trim().length === 0 || email.trim().length === 0) {
-                alert("Bitte Füllen Sie alle Felder aus!");
-                return false;
-            } else if (!emailRegex.test(email)) {
-                alert("Falsches Email-Format!");
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        form.addEventListener('submit', function(event) {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let email = document.getElementById("email").value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            let isFormValid = validateForm(username, password, email, emailRegex);
-            if (!isFormValid) {
-                event.preventDefault();
-            }
-
-        });
-    </script>
+    <script src="validate-form.js"></script>
 </body>
 
 </html>

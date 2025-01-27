@@ -67,6 +67,7 @@ if (isset($_POST['delete'])) {
         $deleteData = "DELETE FROM reg_users WHERE email = '$deleteEmail'";
         $resultFromDelete = mysqli_query($conn, $deleteData);
         echo 'Daten wurden gelöscht';
+        echo '<a href="login.php">zurück zum login</a>';
     } else {
         echo 'Diese Email existiert nicht. Versuchen Sie es nochmal.';
         include 'back-button.php';

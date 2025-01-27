@@ -3,7 +3,7 @@ include 'connection-db.php';
 
 session_unset();
 session_destroy();
-//Testkommentar
+
 ?>
 
 <!DOCTYPE html>

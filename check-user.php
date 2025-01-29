@@ -10,15 +10,19 @@ $password = $_POST['password'];
 $conn = mysqli_connect($host, $user, $pass, $datab);
 
 if ($conn) {
-    echo '<h1 style="text-align: center;">Connection successful!</h1>';
+    echo '<h1 style="text-align: center;">Verbindung zur Datenbank erfolgreich!</h1>';
 } else {
-    echo '<h1 style="text-align: center;">Failed connection!</h1>' . mysqli_connect_error();
+    echo '<h1 style="text-align: center;">Verbindung zur Datenbank fehlgeschlagen!</h1>' . mysqli_connect_error();
 }
 
 if (!empty($username) && !empty($password) && isset($_POST['login'])) {
-    #prepared statements verwenden nicht vergessen
-    $sqlQuerySelect = "SELECT password FROM reg_users WHERE name = '$username'";
-    $result = mysqli_query($conn, $sqlQuerySelect);
+
+    $sqlQuerySelect = "SELECT password FROM reg_users WHERE name = ?";
+    $stmt = mysqli_prepare($conn, $sqlQuerySelect);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -28,18 +32,19 @@ if (!empty($username) && !empty($password) && isset($_POST['login'])) {
             echo '<p style="text-align: center;">Du bist eingeloggt!</p>';
             $deleteLogoutButton = false;
         } else {
-            #LOGOUT Button entfernen nicht vergessen!
+
             $deleteLogoutButton = true;
             echo '<p>Dieser Account existiert nicht!</p>';
-            echo '<a href="forgot-password.php">Passwort vergessen?</a>';
+
             include 'back-button.php';
         }
     } else {
         echo '<p>Dieser Account existiert nicht!</p>';
-        echo '<a href="forgot-password.php">Passwort vergessen?</a>';
+
         include 'back-button.php';
         $deleteLogoutButton = true;
     }
+    mysqli_stmt_close($stmt);
 } else {
     echo '<h2 style="display:block;">Bitte füllen Sie die Felder aus!</h2>';
     include 'back-button.php';
@@ -64,7 +69,7 @@ mysqli_close($conn);
 <body>
     <form action="login.php" method="POST" id="logout">
         <div>
-            <button type="submit" class="btn btn-primary mb-3" name="logout" >ausloggen</button>
+            <button type="submit" class="btn btn-primary mb-3" name="logout">ausloggen</button>
             <?php
             if ($deleteLogoutButton) {
                 echo '<script>deleteForm();</script>';

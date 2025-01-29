@@ -27,7 +27,7 @@
             history.back();
         });
     </script>
-    <!--<a href="#" onclick="history.back(); return false;">Zurück</a>-->
+    
 
 </body>
 

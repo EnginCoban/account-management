@@ -11,7 +11,7 @@ Das Projekt nutzt **Bootstrap** für ein responsives Design sowie **JavaScript**
 - Benutzerregistrierung mit sicherem Passwort-Hashing → [siehe hier](database.php#L18)
 - Benutzer-Login mit Passwortprüfung → [siehe hier](check-user.php#L18) 
 - Benutzerdaten zurücksetzen mit Bestätigungscode → [siehe hier](https://github.com/EnginCoban/account-management/blob/main/database.php#L95) & → [hier](https://github.com/EnginCoban/account-management/blob/main/database.php#L127)
-- Benutzerkonto löschen → [siehe hier](database.php#L95)
+- Benutzerkonto löschen → [siehe hier](database.php#L69)
 - Verwendung von MySQLi für die Datenbankkommunikation
 - Nutzung von Bootstrap für das Design
 - einfache Formularvalidierung mit JavaScript, PHP

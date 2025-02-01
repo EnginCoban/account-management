@@ -8,10 +8,10 @@ Das Projekt nutzt **Bootstrap** für ein responsives Design sowie **JavaScript**
 
 ## Features
 
-- Benutzerregistrierung mit sicherem Passwort-Hashing
-- Benutzer-Login mit Passwortprüfung
-- Benutzerdaten zurücksetzen mit Bestätigungscode
-- Benutzerkonto löschen
+- Benutzerregistrierung mit sicherem Passwort-Hashing ([database.php](database.php))*➡️ `if (isset($_POST['createAccount']))...`*
+- Benutzer-Login mit Passwortprüfung ([check-user.php](check-user.php)) *➡️ `if (!empty($username) && !empty($password) && isset($_POST['login']))`*
+- Benutzerdaten zurücksetzen mit Bestätigungscode ([database.php](database.php))*➡️ `if (isset($_POST['forgot']))...if (isset($_POST['change']))...`*
+- Benutzerkonto löschen ([database.php](database.php)) *➡️ `if (isset($_POST['delete']))...`*
 - Verwendung von MySQLi für die Datenbankkommunikation
 - Nutzung von Bootstrap für das Design
 - einfache Formularvalidierung mit JavaScript, PHP

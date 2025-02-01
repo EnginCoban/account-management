@@ -8,8 +8,7 @@ Das Projekt nutzt **Bootstrap** für ein responsives Design sowie **JavaScript**
 
 ## Features
 
-- Benutzerregistrierung mit sicherem Passwort-Hashing ([database.php](database.php))*➡️ `if (isset($_POST['createAccount']))...`* ([test](https://github.com/EnginCoban/account-management/blob/main/database.php#L18))
-
+- Benutzerregistrierung mit sicherem Passwort-Hashing ([database.php](database.php))*➡️ `if (isset($_POST['createAccount']))...`* ([siehe](database.php#L18))
 - Benutzer-Login mit Passwortprüfung ([check-user.php](check-user.php)) *➡️ `if (!empty($username) && !empty($password) && isset($_POST['login']))`*
 - Benutzerdaten zurücksetzen mit Bestätigungscode ([database.php](database.php))*➡️ `if (isset($_POST['forgot']))...if (isset($_POST['change']))...`*
 - Benutzerkonto löschen ([database.php](database.php)) *➡️ `if (isset($_POST['delete']))...`*

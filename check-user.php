@@ -70,11 +70,13 @@ mysqli_close($conn);
     <form action="login.php" method="POST" id="logout">
         <div>
             <button type="submit" class="btn btn-primary mb-3" name="logout">ausloggen</button>
-            <?php
-            if ($deleteLogoutButton) {
-                echo '<script>deleteForm();</script>';
-            }
-            ?>
+
+            <?php if ($deleteLogoutButton) : ?>
+                <script>
+                    deleteForm();
+                </script>
+            <?php endif; ?>
+
         </div>
 
     </form>
